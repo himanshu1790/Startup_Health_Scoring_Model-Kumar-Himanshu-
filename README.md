@@ -1,104 +1,121 @@
 # 🚀 Startup Health Scoring Model
 
-**Submitted for:** ScaleDux AI Internship – Task 1  
 **Candidate:** Kumar Himanshu  
-**Role:** Artificial Intelligence Intern
+**Submission for:** ScaleDux AI Internship – Task 1  
+**Role Applied:** Artificial Intelligence Intern
 
 ---
 
-## 💡 What This Project Is About
+## 💡 Project Summary
 
-This project simulates a scoring system for startups — kind of like a credit score, but based on business health. Using basic data points like team strength, market potential, user traction, and financials, I’ve built a model that gives each startup a score out of 100 to represent its overall health and potential.
-
----
-
-## 📊 What's in the Dataset?
-
-The dataset includes 100 fictional startups. For each startup, we have:
-
-- `startup_id`: Unique startup name/ID  
-- `team_experience`: Average years of experience on the core team (1–10 scale)  
-- `market_size_million_usd`: Claimed market size in million USD  
-- `monthly_active_users`: Number of users actively using the product each month  
-- `monthly_burn_rate_inr`: Monthly spending in INR  
-- `funds_raised_inr`: Total funds raised till now  
-- `valuation_inr`: Current company valuation in INR
+This project is about building a scoring system that helps evaluate the overall health of startups — kind of like how credit scores work for individuals. The goal is to analyze different business factors like team experience, market size, user engagement, and funding to generate a score (out of 100) that reflects a startup’s potential.
 
 ---
 
-## ⚙️ How I Built the Scoring Model
+## 📊 About the Dataset
 
-First, I cleaned and normalized all the numeric features using Min-Max scaling (to bring them on a 0–1 scale). Since high burn rate is bad for a startup’s sustainability, I reversed that value so lower burn contributes to a better score.
+The dataset includes data from 100 fictional startups, each with the following details:
 
-Then, I assigned weights to each feature based on its importance:
-
-| Feature                | Weight (%) | Why it matters                     |
-|------------------------|------------|------------------------------------|
-| Team Experience        | 15         | A solid team can execute better    |
-| Market Size            | 20         | Bigger market = bigger opportunity |
-| Monthly Active Users   | 25         | Shows real product traction        |
-| Burn Rate (inverted)   | 10         | Low spending = longer runway       |
-| Funds Raised           | 15         | Indicates external belief          |
-| Valuation              | 15         | Reflects market confidence         |
-
-Each startup’s final score is calculated based on this formula, scaled to 100.
+- **Team Experience**: Average experience (1 to 10 scale)
+- **Market Size**: Total addressable market (in million USD)
+- **Monthly Active Users**: Number of active users using the product
+- **Burn Rate**: Monthly operational expenses (in INR)
+- **Funds Raised**: Total money raised so far (in INR)
+- **Valuation**: Current company valuation (in INR)
 
 ---
 
-## 🏆 What I Found
+## ⚙️ My Approach
 
-After ranking all 100 startups:
+1. **Preprocessing**: I normalized all the numeric data to bring them to the same scale (0 to 1) using Min-Max scaling.
 
-- The **Top 10 startups** had strong user engagement, experienced teams, and were operating in large markets.
-- The **Bottom 10** often had high burn rates, small user bases, or limited funding.
+2. **Burn Rate Handling**: Since a high burn rate is a negative sign, I inverted it during normalization so that lower expenses result in a higher score.
 
-It was interesting to see that just having high valuation or funds didn’t always mean a good score — team experience and traction played a huge role.
+3. **Weighted Scoring**: I created a custom formula by assigning weights to each feature based on how important I believe it is for a startup’s success.
 
----
+4. **Final Score**: Each startup’s score is calculated out of 100 using the weighted sum of all features.
 
-## 📉 Visuals Included
-
-- A bar chart showing all startup scores ranked
-- A correlation heatmap showing how different features relate
-- A histogram showing how the scores are spread out
-
-These help to quickly understand the patterns in the data.
+5. **Ranking**: Startups are ranked from best to worst based on their score.
 
 ---
 
-## 📁 Project Structure
+## 🧠 How I Designed the Score (Scoring Methodology)
 
+I tried to keep the scoring logic simple, practical, and similar to how real investors might think.
+
+- **Monthly Active Users (25%)**: The most direct measure of real-world traction.
+- **Market Size (20%)**: Bigger market = more room to grow.
+- **Team Experience (15%)**: A strong team is always a big plus.
+- **Valuation (15%)**: Reflects market confidence.
+- **Funds Raised (15%)**: Shows investor trust and backing.
+- **Burn Rate (10%)**: High burn = high risk, so lower is better (inverted while scoring).
+
+📌 All features were scaled to ensure fairness.  
+📌 The final score was calculated as:  
+```python
+health_score = sum(normalized_feature × weight) × 100
+```
+
+This score offers a balanced view of how strong or risky a startup might be.
+
+---
+
+## 🏆 Key Insights
+
+- Startups with a healthy balance of strong user engagement, low burn, and experienced teams scored the highest.
+- Surprisingly, high valuation alone didn’t guarantee a top rank — traction and team mattered more.
+- Some low scorers had good funding but poor user numbers or high expenses.
+
+---
+
+## 📊 Visuals I Created
+
+- ✅ A bar chart showing ranked scores of all startups
+- ✅ A correlation heatmap to show how features relate
+- ✅ A histogram showing how health scores are spread
+
+You can find these visuals inside the `outputs/` folder.
+
+---
+
+## 🧾 Folder Structure
+
+```
 StartupHealthScoring/
-│
 ├── Startup_Scoring_Dataset.csv
 ├── notebooks/
-│ └── Startup_Health_Scoring_Model.ipynb
+│   └── Startup_Health_Scoring_Model.ipynb
 ├── outputs/
-│ ├── health_score_bar_chart.png
-│ ├── correlation_heatmap.png
-│ └── health_score_distribution.png
+│   ├── health_score_bar_chart.png
+│   ├── correlation_heatmap.png
+│   └── health_score_distribution.png
 └── README.md
+```
 
 ---
 
-## 🛠 Tools & Technologies
+## 🧰 Tools Used
 
-- **Python** for coding
-- **Pandas** and **NumPy** for data handling
-- **Seaborn** and **Matplotlib** for visualization
-- **Scikit-learn** for data normalization
-- **Jupyter Notebook / Google Colab** as the development environment
-
----
-
-## 🔭 Ideas for Improvement
-
-- Try clustering startups based on their profiles (e.g., low burn, high growth)
-- Use machine learning models like regression or XGBoost to predict valuation
-- Include historical (time-based) data to make the model more dynamic
+- Python (main language)
+- Pandas & NumPy for data handling
+- Scikit-learn for normalization
+- Matplotlib & Seaborn for visuals
+- Jupyter Notebook / Google Colab for development
 
 ---
 
-## 🙌 Thanks!
+## 💡 What Can Be Improved
 
-This project was a great way to apply data science to a business case.
+- Use clustering to group startups into types (e.g., high growth vs. high burn)
+- Build a predictive model to estimate future valuation
+- Add a dashboard to explore startups interactively
+- Include time-based data if available to track performance over time
+
+---
+
+## 🙏 Final Thoughts
+
+This task was a great hands-on exercise that combines both business understanding and data science. It helped me think critically about how startup metrics connect and how we can use data to make better investment decisions.
+
+Thanks to the ScaleDux team for the opportunity!  
+Looking forward to learning more and contributing meaningfully to your projects.
