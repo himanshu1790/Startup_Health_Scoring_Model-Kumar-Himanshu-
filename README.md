@@ -101,6 +101,4 @@ StartupHealthScoring/
 
 ## 🙌 Thanks!
 
-This project was a great way to apply data science to a business case.  
-If you'd like to connect or provide feedback, feel free to reach out!
-
+This project was a great way to apply data science to a business case.
